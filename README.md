@@ -1,38 +1,39 @@
 # Employment Management System
 
-A responsive employee management web application built with PHP and MySQL for local development in XAMPP. The interface uses a dark portfolio style with a light theme option and responsive layouts.
+A responsive employee management system built with PHP and MySQL. The application runs locally with XAMPP; this repository also includes a static GitHub Pages preview.
+
+## Live preview
+
+**[Open the static EMS preview](https://itz-shiva-29.github.io/employment-management-system/)**
+
+The preview uses fictional sample data and browser-only interactions. It does not provide real sign-in, save edits, or connect to a database. Use the PHP application below for the working system.
 
 ## Features
 
 - Role-based workspaces for Administrator, HR staff, and Employee accounts.
-- Secure sign-in and sign-out with hashed passwords, session expiry, CSRF checks, and server-side role checks.
-- Employee directory with search, department and status filters, employee creation, editing, and activation/deactivation.
-- Department records with employee counts and active/inactive status.
-- Employee check-in/check-out, staff-entered attendance, daily statuses, date filters, and history.
-- Leave requests, HR/admin review, request status, and in-app notifications.
-- Dashboards, CSV reports for people, attendance, and leave, plus an administrator activity log.
-- Employee self-service for profile contact details, attendance, leave, and notifications.
-- Responsive sidebar, dark/light theme, and browser-side UI interactions.
+- Hashed-password sign-in, sessions, CSRF checks, and server-side role checks.
+- Employee directory with search, department and status filters, create/edit, and activation controls.
+- Department management, attendance tracking, leave requests, and HR/admin review.
+- Dashboards, CSV reports, activity log, employee self-service, and in-app notifications.
+- Responsive layout with dark and light themes.
 
 ## Technology
 
 - PHP 8.1 or later with PDO MySQL
 - MySQL through XAMPP
 - HTML, CSS, JavaScript, and Bootstrap 5.3.3
-- No Composer or npm build step is required
 
-Bootstrap and Google Fonts are loaded from CDNs. System fonts are used as fallbacks.
+No Composer or npm build step is required. Bootstrap and Google Fonts load from CDNs.
 
-## Local setup with XAMPP
+## Run the working app locally
 
 1. Place the project folder at `C:\xampp\htdocs\EMS`.
 2. Start Apache and MySQL in the XAMPP Control Panel.
 3. Open [phpMyAdmin](http://localhost/phpmyadmin/) and import `database/ems.sql`.
-4. Select the `ems` database and import `database/seed.sql` to add fictional departments, employees, and development accounts.
-5. Check `config/database.php` if your local MySQL connection differs from the XAMPP defaults.
-6. Open [http://localhost/EMS/](http://localhost/EMS/).
+4. Select the `ems` database and import `database/seed.sql` for fictional development data and sample accounts.
+5. Open [http://localhost/EMS/](http://localhost/EMS/).
 
-**Database warning:** `database/ems.sql` drops and recreates EMS tables. Back up existing EMS data before importing it again. The seed file is for local development; change or deactivate its sample accounts before making the app reachable outside your computer.
+**Database warning:** `database/ems.sql` drops and recreates EMS tables. Back up existing data before importing it again. Seed accounts are only for local development; change or deactivate them before any public deployment.
 
 ## Roles
 
@@ -48,8 +49,8 @@ Bootstrap and Google Fonts are loaded from CDNs. System fonts are used as fallba
 - [XAMPP setup guide](docs/EMS_XAMPP_Setup_Guide.docx)
 - [EMS user guide](docs/EMS_User_Guide.docx)
 
-## Security and current scope
+## Security and scope
 
-This project is configured for local XAMPP use. The default database configuration uses MySQL `root` with a blank password. Do not use these settings or development seed accounts on a public server. A production deployment needs secure database credentials, HTTPS, backups, and an operational security review.
+The local XAMPP configuration uses MySQL `root` with a blank password. Do not use these credentials or the development seed accounts on a public PHP host. Keep real employee records off free portfolio hosting.
 
-The current app does not include payroll, recruitment, leave-balance calculations, password reset, multi-factor authentication, or profile-photo uploads. Leave policy and attendance schedules are not calculated.
+The app does not include payroll, recruitment, leave-balance calculations, password reset, multi-factor authentication, or profile-photo uploads. Leave policy and attendance schedules are not calculated.
