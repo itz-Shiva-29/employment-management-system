@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A static portfolio preview of the Employment Management System.">
+  <title>EMS · People operations</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1016;--panel:#111923;--panel2:#151f2a;--line:#222e3a;--text:#edf2f7;--muted:#8492a1;--accent:#8fe0c4;--accent2:#213c37;--blue:#9cc8ff;--amber:#f3c781;--red:#f39c9c;--shadow:0 18px 50px #0003}
+    [data-theme=light]{color-scheme:light;--bg:#f2f5f7;--panel:#fff;--panel2:#f7f9fa;--line:#e4e9ed;--text:#1b2630;--muted:#71808e;--accent:#247d64;--accent2:#e1f3ed;--blue:#3677b8;--amber:#a56c15;--red:#b94d4d;--shadow:0 14px 38px #22334412}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,"Segoe UI",Arial,sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer;color:inherit}
+    .app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}.sidebar{background:var(--panel);border-right:1px solid var(--line);padding:25px 17px;display:flex;flex-direction:column;gap:28px}.brand{display:flex;align-items:center;gap:11px;padding:0 10px;font-size:15px;font-weight:750;letter-spacing:.04em}.brand-mark{display:grid;place-items:center;width:35px;height:35px;border-radius:12px;background:var(--accent);color:#102019;font-weight:900;font-size:19px}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.19em;margin-top:1px}.nav-label{color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.14em;padding:0 11px;margin-bottom:7px}.nav{display:grid;gap:4px}.nav button{background:none;border:0;color:var(--muted);text-align:left;padding:10px 11px;border-radius:9px;display:flex;align-items:center;gap:12px}.nav button:hover,.nav button.active{background:var(--accent2);color:var(--accent)}.nav-icon{width:18px;text-align:center;font-size:15px}.sidebar-bottom{margin-top:auto}.workspace{border:1px solid var(--line);padding:12px;border-radius:11px;color:var(--muted);font-size:12px}.workspace b{display:block;color:var(--text);font-size:13px;margin-bottom:3px}
+    main{min-width:0}.topbar{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;gap:15px}.crumb{color:var(--muted);font-size:13px}.crumb strong{color:var(--text);font-weight:600}.top-actions{display:flex;align-items:center;gap:10px}.search{width:min(270px,30vw);position:relative}.search input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:9px 12px 9px 34px;outline:none}.search:before{content:"⌕";position:absolute;left:12px;top:5px;color:var(--muted);font-size:20px}.icon-btn{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--muted)}.profile{display:flex;align-items:center;gap:9px;margin-left:5px}.avatar{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#344b5f;color:#d7ebff;font-weight:700;font-size:12px}.profile b{font-size:12px;display:block}.profile small{color:var(--muted);font-size:10px}
+    .content{max-width:1440px;margin:auto;padding:31px 34px 55px}.preview-banner{border:1px solid #416359;background:linear-gradient(100deg,#16342e,#1b292b);color:#b9e5d5;border-radius:10px;padding:11px 14px;margin-bottom:22px;display:flex;align-items:center;gap:10px;font-size:12px}.preview-banner span{font-size:16px}.screen{display:none}.screen.active{display:block}.heading{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:24px}.eyebrow{font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--accent);font-weight:700}.heading h1{font-size:27px;line-height:1.2;margin:5px 0 5px;font-weight:650;letter-spacing:-.035em}.heading p{margin:0;color:var(--muted);font-size:13px}.button{border:1px solid var(--line);background:var(--panel2);padding:9px 13px;border-radius:8px;color:var(--text);font-weight:600;font-size:12px}.button.primary{background:var(--accent);border-color:var(--accent);color:#102019}.button:hover{filter:brightness(1.08)}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:17px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}.stat{padding:17px 18px}.stat-head{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.stat-icon{color:var(--accent);font-size:17px}.stat-value{font-size:27px;font-weight:650;letter-spacing:-.04em;margin:11px 0 4px}.stat-foot{color:var(--muted);font-size:11px}.up{color:var(--accent)}
+    .grid-two{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,.8fr);gap:16px;margin-bottom:16px}.card{padding:19px}.card-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}.card-title h2{font-size:14px;margin:0;font-weight:650}.card-title span{font-size:11px;color:var(--muted)}.chart{height:210px;display:flex;align-items:flex-end;gap:16px;padding:14px 5px 24px;border-bottom:1px solid var(--line);background:repeating-linear-gradient(to bottom,transparent 0,transparent 51px,var(--line) 52px,var(--line) 53px)}.bar-col{height:100%;flex:1;display:flex;align-items:flex-end;gap:4px;position:relative}.bar{width:50%;border-radius:5px 5px 1px 1px;background:#3c7767;min-height:3px}.bar.alt{background:#324a5a}.bar-col label{position:absolute;bottom:-22px;left:0;right:0;text-align:center;color:var(--muted);font-size:10px}.legend{display:flex;gap:18px;color:var(--muted);font-size:10px;margin-top:13px}.legend i{display:inline-block;width:8px;height:8px;border-radius:2px;background:#3c7767;margin-right:5px}.legend i.alt{background:#324a5a}
+    .activity-list{display:grid;gap:17px}.activity{display:flex;gap:11px;align-items:flex-start}.activity-dot{height:8px;width:8px;border-radius:50%;background:var(--accent);margin:5px 3px 0}.activity b{font-size:12px;font-weight:600;display:block}.activity small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+    .table-card{padding:0;overflow:hidden}.table-top{padding:17px 19px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.table-top h2{font-size:14px;margin:0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;white-space:nowrap}th{text-align:left;padding:11px 17px;color:var(--muted);font-size:9px;letter-spacing:.1em;font-weight:700;border-bottom:1px solid var(--line)}td{padding:12px 17px;border-bottom:1px solid var(--line);font-size:11px}tbody tr:last-child td{border-bottom:0}.person{display:flex;align-items:center;gap:9px}.person .avatar{width:30px;height:30px;font-size:10px}.person b{font-size:11px;display:block}.person small{font-size:10px;color:var(--muted)}.badge{font-size:9px;padding:4px 8px;border-radius:20px;background:#1e3831;color:#98ddc5}.badge.amber{background:#3a3020;color:#f2ca7d}.badge.blue{background:#1d2f3d;color:#a4cefa}.badge.red{background:#3b2729;color:#edaaaa}
+    .cards-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.dept-card{padding:19px}.dept-card .dept-mark{width:34px;height:34px;border-radius:10px;background:var(--accent2);color:var(--accent);display:grid;place-items:center;font-size:12px;font-weight:700}.dept-card h3{font-size:14px;margin:15px 0 4px}.dept-card p{color:var(--muted);font-size:11px;margin:0}.dept-card footer{border-top:1px solid var(--line);padding-top:12px;margin-top:17px;color:var(--muted);font-size:10px;display:flex;justify-content:space-between}.empty-report{margin-top:14px;padding:30px;text-align:center;color:var(--muted)}
+    .toast{position:fixed;bottom:22px;right:22px;background:var(--panel2);border:1px solid var(--line);box-shadow:var(--shadow);padding:12px 16px;border-radius:9px;opacity:0;transform:translateY(8px);transition:.2s;pointer-events:none;z-index:10}.toast.show{opacity:1;transform:translateY(0)}.menu-btn{display:none}
+    [data-theme=light] .preview-banner{background:#e7f4ee;color:#275d4c;border-color:#c4e1d5}
+    @media(max-width:1000px){.app{grid-template-columns:215px minmax(0,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.content{padding:25px 22px}.topbar{padding:0 22px}.cards-three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:720px){.app{display:block}.sidebar{position:fixed;z-index:8;inset:0 auto 0 0;width:250px;transform:translateX(-102%);transition:.2s;box-shadow:var(--shadow)}.sidebar.open{transform:translateX(0)}.menu-btn{display:inline-grid;place-items:center}.topbar{height:64px;padding:0 15px}.search{width:min(190px,40vw)}.profile span:not(.avatar){display:none}.content{padding:20px 14px 38px}.grid-two{grid-template-columns:1fr}.heading{align-items:flex-start}.heading h1{font-size:23px}.cards-three{grid-template-columns:1fr}.preview-banner{align-items:flex-start}.stats{gap:9px}.stat{padding:13px}.stat-value{font-size:23px}}
+    @media(max-width:410px){.stats{grid-template-columns:1fr 1fr}.top-actions{gap:6px}.profile{display:none}.button{padding:8px 9px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="brand-mark">E</span><span>EMS<small>PEOPLE SYSTEMS</small></span></div>
+    <div><div class="nav-label">WORKSPACE</div><nav class="nav" aria-label="Main navigation">
+      <button class="active" data-view="dashboard"><span class="nav-icon">⌂</span>Overview</button>
+      <button data-view="employees"><span class="nav-icon">♙</span>Employees</button>
+      <button data-view="departments"><span class="nav-icon">▦</span>Departments</button>
+      <button data-view="attendance"><span class="nav-icon">◷</span>Attendance</button>
+      <button data-view="leave"><span class="nav-icon">▤</span>Leave requests</button>
+      <button data-view="reports"><span class="nav-icon">▥</span>Reports</button>
+    </nav></div>
+    <div class="sidebar-bottom"><div class="nav-label">WORKSPACE</div><div class="workspace"><b>Northstar Studio</b>People operations</div></div>
+  </aside>
+  <main>
+    <header class="topbar">
+      <div class="top-actions"><button class="icon-btn menu-btn" id="menu" aria-label="Open menu">☰</button><div class="crumb">Workspace <span> / </span> <strong id="breadcrumb">Overview</strong></div></div>
+      <div class="top-actions">
+        <label class="search"><input id="global-search" placeholder="Search employees…" aria-label="Search employees"></label>
+        <button class="icon-btn" id="theme" aria-label="Toggle light theme">◐</button>
+        <div class="profile"><span class="avatar">AD</span><span><b>Preview Admin</b><small>Administrator</small></span></div>
+      </div>
+    </header>
+    <div class="content">
+      <div class="preview-banner"><span>◈</span><div><b>Static portfolio preview</b> · Fictional sample data only. Changes are temporary and are not saved; sign-in and database features run in the PHP app.</div></div>
+
+      <section class="screen active" data-screen="dashboard">
+        <div class="heading"><div><div class="eyebrow">MONDAY, SEPTEMBER 21</div><h1>Good morning, Admin</h1><p>Here’s what’s happening with your people today.</p></div><button class="button primary" data-demo>＋ Add employee</button></div>
+        <div class="stats">
+          <article class="stat"><div class="stat-head"><span>Total employees</span><span class="stat-icon">♙</span></div><div class="stat-value">248</div><div class="stat-foot"><span class="up">↗ 8.2%</span> from last month</div></article>
+          <article class="stat"><div class="stat-head"><span>Present today</span><span class="stat-icon">◷</span></div><div class="stat-value">221</div><div class="stat-foot">89.1% attendance rate</div></article>
+          <article class="stat"><div class="stat-head"><span>On leave</span><span class="stat-icon">▤</span></div><div class="stat-value">12</div><div class="stat-foot">Across 4 departments</div></article>
+          <article class="stat"><div class="stat-head"><span>Pending requests</span><span class="stat-icon">◌</span></div><div class="stat-value">08</div><div class="stat-foot">Needs HR review</div></article>
+        </div>
+        <div class="grid-two">
+          <article class="card"><div class="card-title"><h2>Attendance overview</h2><span>This week ▾</span></div><div class="chart" aria-label="Attendance chart">
+            <div class="bar-col"><i class="bar" style="height:76%"></i><i class="bar alt" style="height:14%"></i><label>Mon</label></div><div class="bar-col"><i class="bar" style="height:83%"></i><i class="bar alt" style="height:11%"></i><label>Tue</label></div><div class="bar-col"><i class="bar" style="height:72%"></i><i class="bar alt" style="height:18%"></i><label>Wed</label></div><div class="bar-col"><i class="bar" style="height:87%"></i><i class="bar alt" style="height:9%"></i><label>Thu</label></div><div class="bar-col"><i class="bar" style="height:79%"></i><i class="bar alt" style="height:13%"></i><label>Fri</label></div><div class="bar-col"><i class="bar" style="height:18%"></i><i class="bar alt" style="height:4%"></i><label>Sat</label></div><div class="bar-col"><i class="bar" style="height:8%"></i><i class="bar alt" style="height:2%"></i><label>Sun</label></div>
+          </div><div class="legend"><span><i></i>Present</span><span><i class="alt"></i>Absent / leave</span></div></article>
+          <article class="card"><div class="card-title"><h2>Recent activity</h2><span>Today</span></div><div class="activity-list">
+            <div class="activity"><i class="activity-dot"></i><div><b>New employee added</b><small>Aisha Patel joined Engineering · 9:42 AM</small></div></div>
+            <div class="activity"><i class="activity-dot"></i><div><b>Leave request approved</b><small>Marcus Johnson · 10:18 AM</small></div></div>
+            <div class="activity"><i class="activity-dot"></i><div><b>Attendance recorded</b><small>Operations team · 11:06 AM</small></div></div>
+            <div class="activity"><i class="activity-dot"></i><div><b>Department updated</b><small>People &amp; Culture · 11:32 AM</small></div></div>
+          </div></article>
+        </div>
+        <article class="card table-card"><div class="table-top"><h2>Recently joined</h2><button class="button" data-view-link="employees">View directory →</button></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>DEPARTMENT</th><th>ROLE</th><th>JOINED</th><th>STATUS</th></tr></thead><tbody>
+          <tr><td><div class="person"><span class="avatar">AP</span><span><b>Aisha Patel</b><small>EMP-0248</small></span></div></td><td>Engineering</td><td>Product Designer</td><td>Sep 21, 2026</td><td><span class="badge">Active</span></td></tr>
+          <tr><td><div class="person"><span class="avatar">MJ</span><span><b>Marcus Johnson</b><small>EMP-0247</small></span></div></td><td>Operations</td><td>Operations Analyst</td><td>Sep 18, 2026</td><td><span class="badge">Active</span></td></tr>
+          <tr><td><div class="person"><span class="avatar">LC</span><span><b>Lin Chen</b><small>EMP-0246</small></span></div></td><td>Finance</td><td>Financial Analyst</td><td>Sep 15, 2026</td><td><span class="badge">Active</span></td></tr>
+        </tbody></table></div></article>
+      </section>
+
+      <section class="screen" data-screen="employees">
+        <div class="heading"><div><div class="eyebrow">PEOPLE DIRECTORY</div><h1>Employees</h1><p>Browse the people in your organization.</p></div><button class="button primary" data-demo>＋ Add employee</button></div>
+        <article class="card table-card"><div class="table-top"><h2>All employees <span class="muted">(sample)</span></h2><span>248 people</span></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>DEPARTMENT</th><th>ROLE</th><th>EMAIL</th><th>STATUS</th></tr></thead><tbody id="employee-rows">
+          <tr><td><div class="person"><span class="avatar">AP</span><span><b>Aisha Patel</b><small>EMP-0248</small></span></div></td><td>Engineering</td><td>Product Designer</td><td>aisha.patel@example.test</td><td><span class="badge">Active</span></td></tr>
+          <tr><td><div class="person"><span class="avatar">MJ</span><span><b>Marcus Johnson</b><small>EMP-0247</small></span></div></td><td>Operations</td><td>Operations Analyst</td><td>marcus.j@example.test</td><td><span class="badge amber">On leave</span></td></tr>
+          <tr><td><div class="person"><span class="avatar">LC</span><span><b>Lin Chen</b><small>EMP-0246</small></span></div></td><td>Finance</td><td>Financial Analyst</td><td>lin.chen@example.test</td><td><span class="badge">Active</span></td></tr>
+          <tr><td><div class="person"><span class="avatar">SR</span><span><b>Sofia Rivera</b><small>EMP-0245</small></span></div></td><td>People &amp; Culture</td><td>HR Specialist</td><td>sofia.r@example.test</td><td><span class="badge">Active</span></td></tr>
+          <tr><td><div class="person"><span class="avatar">DK</span><span><b>Daniel Kim</b><small>EMP-0244</small></span></div></td><td>Engineering</td><td>Backend Developer</td><td>daniel.kim@example.test</td><td><span class="badge red">Inactive</span></td></tr>
+        </tbody></table></div></article>
+      </section>
+
+      <section class="screen" data-screen="departments">
+        <div class="heading"><div><div class="eyebrow">ORGANIZATION</div><h1>Departments</h1><p>Teams and their current headcount.</p></div><button class="button primary" data-demo>＋ Add department</button></div>
+        <div class="cards-three">
+          <article class="card dept-card"><span class="dept-mark">EN</span><h3>Engineering</h3><p>Product development and technology.</p><footer><span>86 employees</span><span class="badge">Active</span></footer></article>
+          <article class="card dept-card"><span class="dept-mark">OP</span><h3>Operations</h3><p>Business operations and support.</p><footer><span>54 employees</span><span class="badge">Active</span></footer></article>
+          <article class="card dept-card"><span class="dept-mark">PC</span><h3>People &amp; Culture</h3><p>People operations and development.</p><footer><span>32 employees</span><span class="badge">Active</span></footer></article>
+          <article class="card dept-card"><span class="dept-mark">FI</span><h3>Finance</h3><p>Financial planning and accounting.</p><footer><span>28 employees</span><span class="badge">Active</span></footer></article>
+          <article class="card dept-card"><span class="dept-mark">MK</span><h3>Marketing</h3><p>Brand, communications and growth.</p><footer><span>31 employees</span><span class="badge">Active</span></footer></article>
+          <article class="card dept-card"><span class="dept-mark">CS</span><h3>Customer Success</h3><p>Customer onboarding and care.</p><footer><span>17 employees</span><span class="badge">Active</span></footer></article>
+        </div>
+      </section>
+
+      <section class="screen" data-screen="attendance">
+        <div class="heading"><div><div class="eyebrow">TIME &amp; PRESENCE</div><h1>Attendance</h1><p>Today's attendance summary and recent entries.</p></div><button class="button" data-demo>↓ Export CSV</button></div>
+        <div class="stats"><article class="stat"><div class="stat-head"><span>Present</span><span class="stat-icon">✓</span></div><div class="stat-value">221</div><div class="stat-foot">89.1% of employees</div></article><article class="stat"><div class="stat-head"><span>Late</span><span class="stat-icon">◷</span></div><div class="stat-value">09</div><div class="stat-foot">3.6% of employees</div></article><article class="stat"><div class="stat-head"><span>Absent</span><span class="stat-icon">—</span></div><div class="stat-value">06</div><div class="stat-foot">2.4% of employees</div></article><article class="stat"><div class="stat-head"><span>On leave</span><span class="stat-icon">▤</span></div><div class="stat-value">12</div><div class="stat-foot">4.8% of employees</div></article></div>
+        <article class="card table-card"><div class="table-top"><h2>Recent attendance</h2><span>Monday, Sep 21</span></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>DEPARTMENT</th><th>CHECK IN</th><th>CHECK OUT</th><th>STATUS</th></tr></thead><tbody><tr><td><div class="person"><span class="avatar">AP</span><span><b>Aisha Patel</b><small>EMP-0248</small></span></div></td><td>Engineering</td><td>08:54 AM</td><td>—</td><td><span class="badge">Present</span></td></tr><tr><td><div class="person"><span class="avatar">MJ</span><span><b>Marcus Johnson</b><small>EMP-0247</small></span></div></td><td>Operations</td><td>09:16 AM</td><td>—</td><td><span class="badge amber">Late</span></td></tr><tr><td><div class="person"><span class="avatar">LC</span><span><b>Lin Chen</b><small>EMP-0246</small></span></div></td><td>Finance</td><td>08:47 AM</td><td>—</td><td><span class="badge">Present</span></td></tr><tr><td><div class="person"><span class="avatar">SR</span><span><b>Sofia Rivera</b><small>EMP-0245</small></span></div></td><td>People &amp; Culture</td><td>—</td><td>—</td><td><span class="badge blue">On leave</span></td></tr></tbody></table></div></article>
+      </section>
+
+      <section class="screen" data-screen="leave">
+        <div class="heading"><div><div class="eyebrow">TIME AWAY</div><h1>Leave requests</h1><p>Review requests from across the organization.</p></div><button class="button" data-demo>Filter requests</button></div>
+        <article class="card table-card"><div class="table-top"><h2>Requests awaiting review</h2><span>8 pending</span></div><div class="table-wrap"><table><thead><tr><th>EMPLOYEE</th><th>TYPE</th><th>DATES</th><th>REASON</th><th>STATUS</th><th>ACTION</th></tr></thead><tbody><tr><td><div class="person"><span class="avatar">MJ</span><span><b>Marcus Johnson</b><small>Operations</small></span></div></td><td>Annual</td><td>Sep 24 – Sep 25</td><td>Family commitment</td><td><span class="badge amber">Pending</span></td><td><button class="button" data-demo>Review</button></td></tr><tr><td><div class="person"><span class="avatar">LC</span><span><b>Lin Chen</b><small>Finance</small></span></div></td><td>Sick</td><td>Sep 22</td><td>Medical appointment</td><td><span class="badge amber">Pending</span></td><td><button class="button" data-demo>Review</button></td></tr><tr><td><div class="person"><span class="avatar">DK</span><span><b>Daniel Kim</b><small>Engineering</small></span></div></td><td>Personal</td><td>Sep 28 – Sep 29</td><td>Personal matter</td><td><span class="badge">Approved</span></td><td>—</td></tr></tbody></table></div></article>
+      </section>
+
+      <section class="screen" data-screen="reports">
+        <div class="heading"><div><div class="eyebrow">INSIGHTS</div><h1>Reports</h1><p>At-a-glance summaries for this sample workspace.</p></div><button class="button" data-demo>↓ Download report</button></div>
+        <div class="cards-three"><article class="card dept-card"><span class="dept-mark">01</span><h3>Employee report</h3><p>Headcount by department and employment status.</p><footer><span>248 records</span><button class="button" data-demo>Preview</button></footer></article><article class="card dept-card"><span class="dept-mark">02</span><h3>Attendance report</h3><p>Daily attendance totals and attendance rates.</p><footer><span>September 2026</span><button class="button" data-demo>Preview</button></footer></article><article class="card dept-card"><span class="dept-mark">03</span><h3>Leave report</h3><p>Leave requests by type and current status.</p><footer><span>34 requests</span><button class="button" data-demo>Preview</button></footer></article></div>
+      </section>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+  const labels={dashboard:"Overview",employees:"Employees",departments:"Departments",attendance:"Attendance",leave:"Leave requests",reports:"Reports"};
+  const notify=(message)=>{const t=document.getElementById("toast");t.textContent=message;t.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove("show"),2600)};
+  function showView(view){if(!labels[view])return;document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("active",s.dataset.screen===view));document.querySelectorAll("[data-view]").forEach(b=>b.classList.toggle("active",b.dataset.view===view));document.getElementById("breadcrumb").textContent=labels[view];document.getElementById("sidebar").classList.remove("open");window.scrollTo({top:0,behavior:"smooth"})}
+  document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.view)));
+  document.querySelectorAll("[data-view-link]").forEach(b=>b.addEventListener("click",()=>showView(b.dataset.viewLink)));
+  document.querySelectorAll("[data-demo]").forEach(b=>b.addEventListener("click",()=>notify("Static preview only — this action is not saved.")));
+  document.getElementById("theme").addEventListener("click",()=>{const d=document.documentElement;d.dataset.theme=d.dataset.theme==="dark"?"light":"dark"});
+  document.getElementById("menu").addEventListener("click",()=>document.getElementById("sidebar").classList.toggle("open"));
+  document.getElementById("global-search").addEventListener("input",e=>{showView("employees");const q=e.target.value.toLowerCase();document.querySelectorAll("#employee-rows tr").forEach(row=>row.hidden=!row.innerText.toLowerCase().includes(q))});
+</script>
+</body>
+</html>
