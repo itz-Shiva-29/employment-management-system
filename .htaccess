@@ -1,0 +1,10 @@
+# No directory listings
+Options -Indexes
+
+# Block hidden files and folders such as .git, .env and .htaccess
+RedirectMatch 403 (^|/)\.(?!well-known/)
+
+# Block project files that are not web pages
+<FilesMatch "\.(sql|md|log|bak|ini|sh|txt)$">
+  Require all denied
+</FilesMatch>

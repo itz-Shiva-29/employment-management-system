@@ -4,15 +4,29 @@ if(is_logged_in()) redirect('index.php');
 $error=''; verify_csrf();
 if($_SERVER['REQUEST_METHOD']==='POST'){
     $identity=trim($_POST['identity']??'');$password=$_POST['password']??'';
-    try{$q=db()->prepare("SELECT id,username,email,password,role,status FROM users WHERE (email=? OR username=?) LIMIT 1");$q->execute([$identity,$identity]);$user=$q->fetch();
-        if($user&&$user['status']==='active'&&password_verify($password,$user['password'])){session_regenerate_id(true);unset($user['password']);$_SESSION['user']=$user;$_SESSION['last_activity']=time();log_activity('Login','Signed in');flash('success','Signed in as '.$user['username'].'.');redirect('index.php');}
-        $error='Those sign-in details don’t match an active account.';
-    }catch(Throwable){$error='Employment Management System could not connect to its database. Import database/ems.sql and check config/database.php.';}
+    $ip=(string)($_SERVER['REMOTE_ADDR']??'unknown');
+    try{$pdo=db();ems_login_attempts_table($pdo);
+        if(ems_login_blocked($pdo,$identity,$ip)){$error='Too many failed sign-in attempts. Wait '.EMS_LOGIN_WINDOW_MINUTES.' minutes and try again.';}
+        else{
+            $q=$pdo->prepare("SELECT id,username,email,password,role,status FROM users WHERE (email=? OR username=?) LIMIT 1");$q->execute([$identity,$identity]);$user=$q->fetch();
+            if($user&&$user['status']==='active'&&password_verify($password,$user['password'])){
+                ems_login_succeeded($pdo,$identity);
+                if(password_needs_rehash($user['password'],PASSWORD_DEFAULT))$pdo->prepare('UPDATE users SET password=? WHERE id=?')->execute([password_hash($password,PASSWORD_DEFAULT),$user['id']]);
+                $usesDefault=hash_equals(EMS_DEFAULT_ADMIN_PASSWORD,$password);
+                session_regenerate_id(true);unset($user['password']);$_SESSION['user']=$user;$_SESSION['last_activity']=time();log_activity('Login','Signed in');
+                if($usesDefault){$_SESSION['uses_default_password']=true;flash('warning','You are using the published starter password. Change it now.');redirect('account.php');}
+                flash('success','Signed in as '.$user['username'].'.');redirect('index.php');
+            }
+            ems_login_failed($pdo,$identity,$ip);
+            $error='Those sign-in details don’t match an active account.';
+        }
+    }catch(Throwable){$error='Employment Management System could not connect to its database. Import database/ems.sql and check the database settings in config.';}
 }
 $flashes=take_flashes();
 if($_SERVER['REQUEST_METHOD']!=='POST'){
     if(isset($_GET['signed_out']))$flashes[]=['success','You have signed out.'];
     if(isset($_GET['expired']))$flashes[]=['warning','Your session ended after 60 minutes of inactivity. Sign in again to continue.'];
+    if(isset($_GET['deactivated']))$flashes[]=['warning','Your account is no longer active. Contact your administrator.'];
 }
 $asset=fn(string $p)=>app_url($p).'?v='.filemtime(__DIR__.'/'.$p);
 ?><!doctype html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Sign in · Employment Management System</title><?=ems_head_meta('Sign in to the Employment Management System to manage employees, attendance, leave and payroll.')?><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet" href="<?=e($asset('assets/css/style.css'))?>"></head><body class="login-page"><main class="login-shell"><section class="login-art"><a class="brand" href="<?=e(app_url('index.html'))?>" aria-label="Employment Management System, about this project"><span class="brand-mark">E</span><span>Employment<br>Management System</span></a><div class="art-copy"><span class="eyebrow">FOR ADMINISTRATORS, HR AND EMPLOYEES</span><h1>People, attendance, leave and payroll in one place.</h1><p>Administrators and HR manage employee records and approvals. Employees mark attendance, request leave and view their payslips.</p></div></section><section class="login-panel"><button class="theme-toggle login-theme icon-button" type="button" aria-label="Toggle theme"><?=ems_icon('theme')?></button><div class="login-card"><span class="eyebrow">SIGN IN</span><h2>Sign in to Employment Management System</h2><p class="muted-text">Use the work email or username your administrator gave you.</p><?php foreach($flashes as [$t,$m]):?><div class="flash <?=e($t)?>" role="status"><span><?=e($m)?></span></div><?php endforeach;?><?php if($error):?><div class="flash danger" role="alert"><span><?=e($error)?></span></div><?php endif;?><form method="post" class="stack-form" data-loading><?=csrf_field()?><label for="identity">Email or username<input id="identity" name="identity" autocomplete="username" required autofocus value="<?=e($_POST['identity']??'')?>"></label><label for="password">Password<span class="password-wrap"><input id="password" type="password" name="password" autocomplete="current-password" required><button class="password-toggle" type="button" data-password="password" aria-controls="password">Show</button></span></label><button class="button primary full" type="submit">Sign in</button></form><div class="login-foot">© <?=date('Y')?> Shivshankar Gupta <span>·</span> <a href="<?=e(app_url('index.html'))?>">About this project</a> <span>·</span> <a href="<?=e(app_url('privacy.html'))?>">Privacy</a> <span>·</span> <a href="<?=e(app_url('terms.html'))?>">Terms</a></div></div></section></main><script src="<?=e($asset('assets/js/app.js'))?>"></script></body></html>

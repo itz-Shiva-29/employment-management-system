@@ -38,7 +38,27 @@ function flash(string $type,string $message): void { $_SESSION['_flash'][]=[$typ
 function take_flashes(): array { $v=$_SESSION['_flash']??[];unset($_SESSION['_flash']);return $v; }
 function is_logged_in(): bool { return isset($_SESSION['user']); }
 function current_user(): array { return $_SESSION['user']??[]; }
-function require_login(): void { if(!is_logged_in()){flash('warning','Please sign in to continue.');redirect('login.php');} if(time()-(int)($_SESSION['last_activity']??time())>3600){$_SESSION=[];session_destroy();redirect('login.php?expired=1');} $_SESSION['last_activity']=time(); }
+function require_login(): void {
+    if(!is_logged_in()){flash('warning','Please sign in to continue.');redirect('login.php');}
+    if(time()-(int)($_SESSION['last_activity']??time())>3600){$_SESSION=[];session_destroy();redirect('login.php?expired=1');}
+    // Re-read the account on every request so deactivation and role changes apply immediately.
+    $q=db()->prepare('SELECT id,username,email,role,status FROM users WHERE id=?');$q->execute([(int)current_user()['id']]);$fresh=$q->fetch();
+    if(!$fresh||$fresh['status']!=='active'){$_SESSION=[];session_destroy();redirect('login.php?deactivated=1');}
+    $_SESSION['user']=$fresh;$_SESSION['last_activity']=time();
+}
+const EMS_LOGIN_WINDOW_MINUTES=15;
+const EMS_LOGIN_MAX_PER_ACCOUNT=5;
+const EMS_LOGIN_MAX_PER_IP=20;
+function ems_login_attempts_table(PDO $pdo): void { $pdo->exec('CREATE TABLE IF NOT EXISTS login_attempts (id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, identity VARCHAR(190) NOT NULL, ip_address VARCHAR(45) NOT NULL, attempted_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, INDEX idx_login_identity (identity, attempted_at), INDEX idx_login_ip (ip_address, attempted_at)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4'); }
+function ems_login_blocked(PDO $pdo,string $identity,string $ip): bool {
+    $since=date('Y-m-d H:i:s',time()-EMS_LOGIN_WINDOW_MINUTES*60);
+    $q=$pdo->prepare('SELECT COUNT(*) FROM login_attempts WHERE identity=? AND attempted_at>=?');$q->execute([strtolower($identity),$since]);if((int)$q->fetchColumn()>=EMS_LOGIN_MAX_PER_ACCOUNT)return true;
+    $q=$pdo->prepare('SELECT COUNT(*) FROM login_attempts WHERE ip_address=? AND attempted_at>=?');$q->execute([$ip,$since]);return (int)$q->fetchColumn()>=EMS_LOGIN_MAX_PER_IP;
+}
+function ems_login_failed(PDO $pdo,string $identity,string $ip): void { $pdo->prepare('INSERT INTO login_attempts(identity,ip_address,attempted_at) VALUES(?,?,?)')->execute([strtolower($identity),$ip,date('Y-m-d H:i:s')]); $pdo->prepare('DELETE FROM login_attempts WHERE attempted_at<?')->execute([date('Y-m-d H:i:s',time()-86400)]); }
+function ems_login_succeeded(PDO $pdo,string $identity): void { $pdo->prepare('DELETE FROM login_attempts WHERE identity=?')->execute([strtolower($identity)]); }
+const EMS_DEFAULT_ADMIN_PASSWORD='ADMIN@123';
+function ems_password_problem(string $pass): ?string { if(strlen($pass)<8||!preg_match('/[A-Z]/',$pass)||!preg_match('/[a-z]/',$pass)||!preg_match('/[0-9]/',$pass)||!preg_match('/[^A-Za-z0-9]/',$pass))return 'Use at least 8 characters with an uppercase letter, a lowercase letter, a number and a symbol.'; if($pass===EMS_DEFAULT_ADMIN_PASSWORD)return 'Choose a password other than the published starter password.'; return null; }
 function require_roles(array $roles): void { require_login();if(!in_array(current_user()['role'],$roles,true)){http_response_code(403);require __DIR__.'/403.php';exit;} }
 function log_activity(string $action,string $details=''): void { if(is_logged_in()) db()->prepare('INSERT INTO activity_logs(user_id,action,details,ip_address) VALUES(?,?,?,?)')->execute([current_user()['id'],$action,$details,$_SERVER['REMOTE_ADDR']??null]); }
 function notify_user(int $id,string $title,string $message,string $type='info'): void { db()->prepare('INSERT INTO notifications(user_id,title,message,type) VALUES(?,?,?,?)')->execute([$id,$title,$message,$type]); }

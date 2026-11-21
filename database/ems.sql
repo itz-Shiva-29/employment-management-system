@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS ems CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE ems;
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS payslips, salary_structures, activity_logs, notifications, announcements, public_holidays, leave_balances, leaves, attendance, employees, job_roles, departments, settings, users;
+DROP TABLE IF EXISTS login_attempts, payslips, salary_structures, activity_logs, notifications, announcements, public_holidays, leave_balances, leaves, attendance, employees, job_roles, departments, settings, users;
 SET FOREIGN_KEY_CHECKS=1;
 CREATE TABLE users (
  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, username VARCHAR(80) NOT NULL UNIQUE, email VARCHAR(190) NOT NULL UNIQUE,
@@ -60,6 +60,7 @@ CREATE TABLE activity_logs (
  CONSTRAINT fk_activity_user FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 CREATE TABLE settings (setting_key VARCHAR(100) PRIMARY KEY, setting_value TEXT NOT NULL, updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB;
+CREATE TABLE login_attempts (id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, identity VARCHAR(190) NOT NULL, ip_address VARCHAR(45) NOT NULL, attempted_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, INDEX idx_login_identity (identity, attempted_at), INDEX idx_login_ip (ip_address, attempted_at)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Gujarat Government public holidays for 2026 (optional holidays are not included).
 INSERT IGNORE INTO public_holidays(holiday_date,holiday_name,created_by) VALUES
