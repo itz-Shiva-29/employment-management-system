@@ -1,0 +1,46 @@
+-- Additive payroll schema migration. This leaves existing employee and attendance data untouched.
+CREATE TABLE IF NOT EXISTS salary_structures (
+ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ employee_id INT UNSIGNED NOT NULL UNIQUE,
+ basic_salary DECIMAL(12,2) NOT NULL DEFAULT 0,
+ dearness_allowance DECIMAL(12,2) NOT NULL DEFAULT 0,
+ hra DECIMAL(12,2) NOT NULL DEFAULT 0,
+ other_allowances DECIMAL(12,2) NOT NULL DEFAULT 0,
+ epf_covered TINYINT(1) NOT NULL DEFAULT 1,
+ epf_rate DECIMAL(4,2) NOT NULL DEFAULT 12.00,
+ pt_exempt TINYINT(1) NOT NULL DEFAULT 0,
+ updated_by INT UNSIGNED NULL,
+ created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ CONSTRAINT fk_salary_employee FOREIGN KEY(employee_id) REFERENCES employees(id) ON DELETE CASCADE,
+ CONSTRAINT fk_salary_editor FOREIGN KEY(updated_by) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS payslips (
+ id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ employee_id INT UNSIGNED NOT NULL,
+ period CHAR(7) NOT NULL,
+ pay_date DATE NOT NULL,
+ basic_salary DECIMAL(12,2) NOT NULL,
+ dearness_allowance DECIMAL(12,2) NOT NULL DEFAULT 0,
+ hra DECIMAL(12,2) NOT NULL DEFAULT 0,
+ other_allowances DECIMAL(12,2) NOT NULL DEFAULT 0,
+ other_earnings DECIMAL(12,2) NOT NULL DEFAULT 0,
+ gross_salary DECIMAL(12,2) NOT NULL,
+ pf_wage DECIMAL(12,2) NOT NULL DEFAULT 0,
+ epf_rate DECIMAL(4,2) NOT NULL DEFAULT 12.00,
+ employee_pf DECIMAL(12,2) NOT NULL DEFAULT 0,
+ employer_pf DECIMAL(12,2) NOT NULL DEFAULT 0,
+ professional_tax DECIMAL(12,2) NOT NULL DEFAULT 0,
+ other_deductions DECIMAL(12,2) NOT NULL DEFAULT 0,
+ total_deductions DECIMAL(12,2) NOT NULL DEFAULT 0,
+ net_salary DECIMAL(12,2) NOT NULL,
+ scheduled_days DECIMAL(6,2) NOT NULL DEFAULT 0,
+ payable_days DECIMAL(6,2) NOT NULL DEFAULT 0,
+ issued_by INT UNSIGNED NULL,
+ issued_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ UNIQUE KEY uq_payslip_employee_period(employee_id,period),
+ INDEX idx_payslip_period(period),
+ CONSTRAINT fk_payslip_employee FOREIGN KEY(employee_id) REFERENCES employees(id) ON DELETE CASCADE,
+ CONSTRAINT fk_payslip_issuer FOREIGN KEY(issued_by) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB;

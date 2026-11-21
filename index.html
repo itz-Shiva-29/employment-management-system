@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Employment Management System · Project by Shivshankar Gupta</title>
+  <meta name="description" content="Employment Management System is a PHP and MySQL web application for employee records, attendance, leave and payroll, with separate workspaces for administrators, HR staff and employees.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="#top" aria-label="Employment Management System, back to top"><img src="assets/img/favicon.svg" alt="" width="32" height="32">Employment Management System</a>
+    <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <span>Menu</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#roles">Roles</a></li>
+        <li><a href="#screenshots">Screenshots</a></li>
+        <li><a href="#run">Run locally</a></li>
+        <li><a href="#docs">Documentation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div id="top" class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Project by Shivshankar Gupta</p>
+      <h1>Employment Management System</h1>
+      <p>A PHP and MySQL web application for employee records, attendance, leave and payroll. Administrators, HR staff and employees each sign in to their own workspace.</p>
+      <div class="actions">
+        <a class="button primary" href="#screenshots">See the screenshots</a>
+        <a class="button" href="#run">Run it locally</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 id="features-title">Features</h2>
+      <p class="lead">Everything listed here is built into the application.</p>
+      <ul class="feature-grid">
+        <li><h3>Role-based workspaces</h3><p>Separate access for administrators, HR staff and employees, with server-side role checks, hashed passwords, CSRF protection and session expiry.</p></li>
+        <li><h3>Employee directory</h3><p>Search and filter by department and status, add and edit employees, set reporting managers, and activate or deactivate accounts.</p></li>
+        <li><h3>Attendance</h3><p>Staff record attendance for any working day. Employees set their own status as Present, Absent or On Break. Sundays and public holidays are blocked.</p></li>
+        <li><h3>Leave management</h3><p>Casual Leave (LWP), Paid Leave and Sick Leave requests with HR and admin review, notifications, and administrator-set yearly balances.</p></li>
+        <li><h3>Payroll</h3><p>Salary structures, employee PF at 10% or 12% with the wage ceiling, Gujarat professional tax, joining-month proration and printable monthly payslips.</p></li>
+        <li><h3>Reports and activity log</h3><p>Individual employee reports, CSV exports for people, attendance and leave, and an administrator log of sign-ins and changes.</p></li>
+        <li><h3>Holidays and notices</h3><p>An administrator-managed public holiday calendar and notices that appear in employee workspaces.</p></li>
+        <li><h3>Responsive interface</h3><p>Works on phones, tablets and desktops, with a collapsible sidebar and light and dark themes.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="roles" aria-labelledby="roles-title">
+    <div class="wrap">
+      <h2 id="roles-title">Roles</h2>
+      <p class="lead">Each role sees only the pages it needs.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Role</th><th scope="col">Main access</th></tr></thead>
+          <tbody>
+            <tr><td>Administrator</td><td>Dashboard, people, departments, attendance, leave, reports, payroll, user access, activity log, settings, public holidays and notices</td></tr>
+            <tr><td>HR</td><td>Dashboard, people, departments, attendance, leave, reports and notices</td></tr>
+            <tr><td>Employee</td><td>Dashboard, own profile, attendance, leave requests, payslips, notices, calendar and notifications</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="screenshots" aria-labelledby="screens-title">
+    <div class="wrap">
+      <h2 id="screens-title">Screenshots</h2>
+      <p class="lead">Taken from the running application in the administrator workspace.</p>
+      <div class="shots">
+        <figure><img src="assets/img/screen-dashboard.jpg" width="800" height="609" loading="lazy" alt="Administrator overview page showing active employees, attendance, pending leave, team headcount by department and recent activity."><figcaption>Overview: headcount, today’s attendance, pending leave and recent activity.</figcaption></figure>
+        <figure><img src="assets/img/screen-people.jpg" width="800" height="609" loading="lazy" alt="People page listing employees with department, designation, manager, salary, joining date and status."><figcaption>People: the employee directory with search and filters.</figcaption></figure>
+        <figure><img src="assets/img/screen-payroll.jpg" width="800" height="609" loading="lazy" alt="Payroll page showing payroll setup totals and an employee salary structure form."><figcaption>Payroll: salary structure and statutory deduction settings for each employee.</figcaption></figure>
+      </div>
+      <p class="note">Names and figures in the screenshots are fictional sample data.</p>
+    </div>
+  </section>
+
+  <section class="block" id="tech" aria-labelledby="tech-title">
+    <div class="wrap">
+      <h2 id="tech-title">Technology</h2>
+      <p class="lead">No build step, Composer or npm is required.</p>
+      <ul class="tech">
+        <li>PHP 8.1+ with PDO</li>
+        <li>MySQL</li>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>XAMPP for local development</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="run" aria-labelledby="run-title">
+    <div class="wrap">
+      <h2 id="run-title">Run it locally</h2>
+      <p class="lead">The application needs PHP and MySQL, so it runs on a local server such as XAMPP rather than on this page.</p>
+      <ol class="steps">
+        <li>Place the project folder at <code>C:\xampp\htdocs\EMS</code>.</li>
+        <li>Start Apache and MySQL in the XAMPP Control Panel.</li>
+        <li>In phpMyAdmin, import <code>database/ems.sql</code>, then select the <code>ems</code> database and import <code>database/seed.sql</code>.</li>
+        <li>Check <code>config/database.php</code> if your MySQL connection differs from the XAMPP defaults.</li>
+        <li>Open <code>http://localhost/EMS/</code> and sign in with the starter administrator account described in the setup guide.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="docs" aria-labelledby="docs-title">
+    <div class="wrap">
+      <h2 id="docs-title">Documentation</h2>
+      <p class="lead">Word documents included with the project.</p>
+      <ul class="doc-list">
+        <li><a href="docs/EMS_Complete_Project_Documentation.docx">Complete project documentation (.docx, 50 KB)</a></li>
+        <li><a href="docs/EMS_XAMPP_Setup_Guide.docx">XAMPP setup guide (.docx, 38 KB)</a></li>
+        <li><a href="docs/EMS_User_Guide.docx">User guide (.docx, 38 KB)</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© <span id="year">2026</span> Shivshankar Gupta</span>
+    <nav aria-label="Footer">
+      <a href="#features">Features</a>
+      <a href="#run">Run locally</a>
+      <a href="#docs">Documentation</a>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="terms.html">Terms and conditions</a>
+      <a href="#top">Back to top</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var button=document.getElementById('menu-button'),nav=document.getElementById('site-nav');
+    function setOpen(open){nav.classList.toggle('open',open);button.setAttribute('aria-expanded',open?'true':'false')}
+    button.addEventListener('click',function(){setOpen(!nav.classList.contains('open'))});
+    nav.addEventListener('click',function(e){if(e.target.closest('a'))setOpen(false)});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')setOpen(false)});
+    window.addEventListener('resize',function(){if(window.innerWidth>760)setOpen(false)});
+    document.getElementById('year').textContent=new Date().getFullYear();
+  })();
+</script>
+</body>
+</html>

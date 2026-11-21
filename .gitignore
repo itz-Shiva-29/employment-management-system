@@ -21,3 +21,6 @@ logs/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Unrelated sample data, not part of EMS
+synthetic_proxies*.txt

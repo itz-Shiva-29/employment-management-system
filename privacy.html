@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy policy · Employment Management System</title>
+  <meta name="description" content="How the Employment Management System collects, uses, stores and protects employee and account information.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="index.html" aria-label="Employment Management System, project page"><img src="assets/img/favicon.svg" alt="" width="32" height="32">Employment Management System</a>
+    <nav aria-label="Main"><a class="button" href="index.html">Project page</a></nav>
+  </div>
+</header>
+
+<main id="main" class="legal">
+  <div class="wrap">
+    <h1>Privacy policy</h1>
+    <p class="updated">Last updated: 21 November 2026</p>
+
+    <div class="summary"><p>The Employment Management System stores the employee and account information that your organisation enters into it, uses it only to run the features described here, and does not sell it, share it for advertising, or track you with analytics.</p></div>
+
+    <h2>Who this policy covers</h2>
+    <p>The Employment Management System is software that an organisation installs and runs on its own server. The organisation that operates your installation (usually your employer) decides what information is entered and is responsible for it. Questions or requests about your information should go to that organisation’s administrator or HR team.</p>
+    <p>This policy describes how the software handles information. It also covers this project page, which is a static website with no sign-in and no forms.</p>
+
+    <h2>Information the application stores</h2>
+    <ul>
+      <li><b>Account details:</b> username, work email, role (administrator, HR or employee), account status, and your password stored as a one-way hash. The original password is never stored.</li>
+      <li><b>Employee records:</b> name, employee ID, work email, phone number, address, city, department, designation, reporting manager, joining date and employment status.</li>
+      <li><b>Pay information:</b> salary structure (basic salary, allowances, provident fund settings and professional-tax exemption) and issued monthly payslips, including deductions and net pay.</li>
+      <li><b>Attendance:</b> date, status, check-in and check-out times, and any remarks.</li>
+      <li><b>Leave:</b> leave type, dates, the reason you give, the decision, who reviewed it and when, and yearly leave balances.</li>
+      <li><b>Notifications and notices:</b> messages sent to your account and notices posted by an administrator.</li>
+      <li><b>Activity log:</b> sign-ins, sign-outs and important changes, with the time, the account that made the change and the IP address it came from.</li>
+    </ul>
+
+    <h2>How the information is used</h2>
+    <ul>
+      <li>To sign you in and show only the pages your role allows.</li>
+      <li>To keep employee records, record attendance, process leave requests and calculate and issue payslips.</li>
+      <li>To send in-app notifications, such as a decision on your leave request.</li>
+      <li>To produce reports and CSV exports for administrators and HR staff.</li>
+      <li>To keep a record of changes for security and accountability.</li>
+    </ul>
+
+    <h2>Who can see it</h2>
+    <ul>
+      <li><b>Employees</b> can see their own profile, attendance, leave, payslips, notifications, and notices.</li>
+      <li><b>HR staff</b> can see and manage employee records, departments, attendance and leave. They cannot open payroll pages or payslips.</li>
+      <li><b>Administrators</b> can see and manage everything in the application, including salaries, payslips, user accounts and the activity log.</li>
+    </ul>
+    <p>The software does not send your information to the developer or to any other company. The organisation operating it may share information outside the application under its own policies, for example with a payroll or tax adviser.</p>
+
+    <h2>Cookies and browser storage</h2>
+    <ul>
+      <li><b>Session cookie (<code>ems_session</code>):</b> keeps you signed in. It cannot be read by page scripts, is not sent with forms or background requests from other websites, and is cleared when you sign out or close the browser. Your session also ends after 60 minutes of inactivity.</li>
+      <li><b>Theme preference (<code>ems-theme</code>):</b> stored in your browser’s local storage to remember light or dark mode. It never leaves your device.</li>
+    </ul>
+    <p>The application and this project page use no analytics, advertising or tracking cookies.</p>
+
+    <h2>Third-party services</h2>
+    <p>Pages load fonts from Google Fonts (fonts.googleapis.com and fonts.gstatic.com), and the application also loads a stylesheet from jsDelivr (cdn.jsdelivr.net). When your browser fetches these files, those services receive your IP address and browser details as part of the normal request. No employee or account information is sent to them.</p>
+
+    <h2>How long information is kept</h2>
+    <p>The application does not delete information automatically. Records stay in the database until the operating organisation removes them. Deactivating an employee stops them from signing in but keeps their records for history and payroll.</p>
+
+    <h2>How information is protected</h2>
+    <ul>
+      <li>Passwords are stored as one-way hashes.</li>
+      <li>Every form is protected against cross-site request forgery.</li>
+      <li>Each page checks your role on the server before showing anything.</li>
+      <li>Database queries use prepared statements.</li>
+      <li>Sessions expire after 60 minutes of inactivity.</li>
+    </ul>
+    <p>The default setup is meant for running on your own computer. An organisation that makes the application available over a network is responsible for securing that server, including HTTPS, database passwords and backups.</p>
+
+    <h2>Your choices</h2>
+    <p>Employees can update their contact details from <b>My profile</b>. To see, correct or remove other information, contact the administrator or HR team of the organisation that operates your installation.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes, the date at the top of this page will be updated.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© <span id="year">2026</span> Shivshankar Gupta</span>
+    <nav aria-label="Footer">
+      <a href="index.html">Project page</a>
+      <a href="privacy.html" aria-current="page">Privacy policy</a>
+      <a href="terms.html">Terms and conditions</a>
+    </nav>
+  </div>
+</footer>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
